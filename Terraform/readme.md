@@ -27,3 +27,6 @@ Note: Each terraform script is executed at once as they are all in the same dire
 - **aws_iam_group_policy**: Creates a group policy for the group and adds it to the group.
 - **aws_iam_user_login_profile**: Creates a login profile using the users created and the keybase accounts passed into it.
 - **output**: Outputs the encrypted passwords to the command prompt to be sent to each user.
+
+
+fnjklsdafnlsadfn
