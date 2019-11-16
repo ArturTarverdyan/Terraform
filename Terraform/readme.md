@@ -50,8 +50,8 @@ Note: Users must create a pgp key and user on keybase.  Once the
 ### vpc.tf
 **Resources**
 - **aws_internet_gateway**: Specifies the vpc main internet gateway.
-- **aws_route_table**:
-- **aws_default_route_table**:
-- **aws_subnet**:
-- **aws_route_table_asociation**:
-- **aws_Security_Group**:
+- **aws_route_table**: Determines where traffic from a subnet is directed.
+- **aws_default_route_table**: Determines the route used if no other route matches the router's forwarding table destination.
+- **aws_subnet**: Creates a subnet to be used within an VPC.
+- **aws_route_table_asociation**: Creates an association between a subnet and routing table.
+- **aws_Security_Group**: Creation of security groups to be used with a NAT instance.
