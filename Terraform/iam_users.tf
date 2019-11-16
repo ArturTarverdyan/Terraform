@@ -1,16 +1,3 @@
-terraform {
-    backend  "s3" {
-    region         = "us-west-2"
-    bucket         = "cit480groupbuck"
-    key            = "ec2/terraform.tfstate" 
-    dynamodb_table = "tf-state-lock"
-    }
-} 
-
-provider "aws" {
-  region		  = "us-west-2"
-  profile		  = "default"
-}
 
 variable "keybase" {
   type    = "list"

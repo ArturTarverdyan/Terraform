@@ -1,17 +1,3 @@
-# Required for the s3 bucket
-terraform {
-    backend  "s3" {
-    region         = "us-west-2"
-    bucket         = "cit480groupbuck"
-    key            = "ec2/terraform.tfstate" 
-    dynamodb_table = "tf-state-lock"
-    }
-} 
-
-# AWS services and infrastructure 
-provider "aws" {
-      region = "us-west-2"
-}
 
 # Bastion 
 resource "aws_instance" "bastion" {
@@ -90,6 +76,19 @@ resource "aws_security_group" "aws-sg" {
   	   protocol = "-1"
 	   cidr_blocks = ["0.0.0.0/0"]
  	}
+	ingress { 
+   	   from_port = 22 
+	   to_port = 22 
+  	   protocol = "tcp" 
+ 	   cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	egress { 
+           from_port = 0
+   	   to_port = 0 
+  	   protocol = "-1"
+	   cidr_blocks = ["0.0.0.0/0"]
+ 	}
 
 	ingress { 
    	   from_port = 443 
@@ -107,18 +106,18 @@ resource "aws_security_group" "aws-sg" {
 
 # Block below requires an ACM certificate and ARN from the domain name owner to establish SSL connection - Garrett 
 # ACM certificate required for the load balancer 
-resource "aws_acm_certificate" "cert" {
-  domain_name       = "thegroupseniordesign.tech"
-  validation_method = "DNS"
+#resource "aws_acm_certificate" "cert" {
+#  domain_name       = "thegroupseniordesign.tech"
+#  validation_method = "DNS"
 
-  tags = {
-    Environment = "test"
-  }
+#  tags = {
+#    Environment = "test"
+#  }
 
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+#  lifecycle {
+#    create_before_destroy = true
+#  }
+#}
 
 # Create a new load balancer
 resource "aws_elb" "elb" {
@@ -133,13 +132,13 @@ resource "aws_elb" "elb" {
   }
 
   # This block requires an ACM certificate and ARN from the domain name owner to establish SSL connection - Garrett
-  listener {
-    instance_port      = 8000
-    instance_protocol  = "http"
-    lb_port            = 443
-    lb_protocol        = "https"
-    ssl_certificate_id = "arn:aws:acm:us-west-2:327250713413:certificate/c058d0e9-b749-4406-989a-c20f1d538a57"
-  }
+#  listener {
+#   instance_port      = 8000
+#    instance_protocol  = "http"
+#    lb_port            = 443
+#    lb_protocol        = "https"
+#    ssl_certificate_id = "arn:aws:acm:us-west-2:327250713413:certificate/c058d0e9-b749-4406-989a-c20f1d538a57"
+#  }
 
   health_check {
     healthy_threshold   = 2
