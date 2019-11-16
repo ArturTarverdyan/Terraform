@@ -10,3 +10,9 @@
 
 ### Instructions ###
 
+**1)** Take the generated {{user}}.pem file and move it to ~/.ssh/{{user}}.pem
+
+**2)** Enter the hosts file, and replace {{webserver1 ip}} & {{webserver2 ip}} & {{bastion ip}} with the correct IP addresses.
+
+**3)** Enter the hosts file, and replace {{user}}.pem with correct .pem file.
+
