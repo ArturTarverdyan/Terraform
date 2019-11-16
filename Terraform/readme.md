@@ -46,3 +46,12 @@ Note: Users must create a pgp key and user on keybase.  Once the
 - **cidr_Range**: This is the default range if nothing is specified.
 - **public_ciders**: Specifies the public IP range of the VPC.
 - **private_ciders**: Specifies the private IP range of the VPC.
+
+### vpc.tf
+**Resources**
+- **aws_internet_gateway**: Specifies the vpc main internet gateway.
+- **aws_route_table**:
+- **aws_default_route_table**:
+- **aws_subnet**:
+- **aws_route_table_asociation**:
+- **aws_Security_Group**:
