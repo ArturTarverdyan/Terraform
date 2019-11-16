@@ -1,0 +1,17 @@
+- name: 10) Install php & extensions
+  become: true
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+  - php-fpm
+  - php-gd
+  - php-curl
+  - php-dom
+  - php-xml
+
+- name: 11) Deploy php Configuration with apache2
+  become: true
+  copy: src=files/www.conf dest=/etc/php/7.0/fpm/pool.d/
+
+- name: 12) Restart php-fpm
+  become: yes
+  service: name=php7.2-fpm state=restarted

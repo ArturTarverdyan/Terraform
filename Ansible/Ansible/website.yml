@@ -1,0 +1,13 @@
+- hosts: bastion
+  become: true
+  gather_facts: false
+  pre_tasks:
+  - name: 1) Install python2
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt -y upgrade && apt install -qqy python-minimal)"
+    register: output
+    changed_when: output.stdout != ""
+  - name: 2) Gather files and tasks
+    setup:
+  roles:
+    - apache2
+    - php-fpm

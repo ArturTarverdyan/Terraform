@@ -1,0 +1,30 @@
+- name: 3) Install apache2
+  become: true
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+  - apache2
+
+- name: 4) Upload apache2 000-default.conf
+  become: yes
+  copy: src=files/000-default.conf dest=/etc/apache2/sites-enabled/
+
+- name: 5) Remove default apache2 index.html
+  become: yes
+  ignore_errors: yes
+  command: rm /var/www/html/index.html 
+
+- name: 6) Upload index.html 
+  become: yes
+  copy: src=files/index.html dest=/var/www/html/ mode=0644  
+
+- name: 7) Upload script.js
+  become: yes
+  copy: src=files/script.js dest=/var/www/html/ mode=0644
+
+- name: 8) Upload style.css
+  become: yes
+  copy: src=files/style.css dest=/var/www/html/ mode=0644
+
+- name: 9) Restart webserver
+  become: yes
+  service: name=apache2 state=restarted
