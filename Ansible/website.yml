@@ -1,4 +1,4 @@
-- hosts: 18.236.155.121
+- hosts: app_servers
   connection: local
 
   tasks:

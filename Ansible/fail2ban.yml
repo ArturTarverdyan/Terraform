@@ -1,0 +1,19 @@
+- hosts: bastion
+  connection: local
+  become: yes
+  tasks:
+  
+  - name: install fail2ban packages
+    apt: 
+      name: "{{ item }}"   
+      state: latest
+      update_cache: yes
+      cache_valid_time: 3600
+    with_items:
+      - fail2ban
+
+  - name: Create a directory
+    file:
+      path: /etc/test
+      state: directory
+      mode: '0755'
