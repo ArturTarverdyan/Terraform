@@ -28,5 +28,21 @@ Note: Each terraform script is executed at once as they are all in the same dire
 - **aws_iam_user_login_profile**: Creates a login profile using the users created and the keybase accounts passed into it.
 - **output**: Outputs the encrypted passwords to the command prompt to be sent to each user.
 
+Note: Users must create a pgp key and user on keybase.  Once the
 
-fnjklsdafnlsadfn
+### main.tf
+**Resources**
+- **Terraform**:  This pronounces the backend bucket held on AWS s3.
+- **aws_s3_bucket**: Names the bucket a unique name.
+- **aws_dynamodb_table**: Creates a state locking table.
+
+### route53.tf
+**Resources**
+- **aws_route53_zone**: Creates the hosted zone under "thegroupseniordesign.tech"
+- **aws_route53_record**: Supposed to create an A record to redirect the subdomain "www.thegroupseniordesign.tech" to the elb.
+
+### variable.tf
+**Variables**
+- **cidr_Range**: This is the default range if nothing is specified.
+- **public_ciders**: Specifies the public IP range of the VPC.
+- **private_ciders**: Specifies the private IP range of the VPC.
