@@ -142,3 +142,33 @@
     - name: 12) Restart php-fpm
       become: yes
       service: name=php7.2-fpm state=restarted
+
+## Fail2ban ##
+
+### Instructions ###
+
+**1)** Navigate to Terraform/Ansible and run **sudo ansible-playbook fail2ban.yml**
+
+### Documentation ###
+
+**fail2ban.yml**
+
+    - hosts: bastion
+      become: yes
+      gather_facts: false
+      tasks:
+      
+      - name: install fail2ban packages
+    apt: 
+      name: "{{ item }}"   
+      state: latest
+      update_cache: yes
+      cache_valid_time: 3600
+    with_items:
+      - fail2ban
+    
+      - name: Create a directory
+    file:
+      path: /etc/test
+      state: directory
+      mode: '0755'
